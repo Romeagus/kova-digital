@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banti Horneados Artesanales — Pedidos Directos | Temperley</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#faf6f0; --card:#fff; --ink:#241914; --muted:#6f5d52; --accent:#b65c3a; --accent-d:#924528; --green:#1d6f4e; --border:#ebe0d3; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:'DM Sans',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; padding-bottom:80px; }
+    h1,h2,h3 { font-family:'Fraunces',Georgia,serif; margin:0; line-height:1.15; }
+    a { color:inherit; text-decoration:none; }
+    .kova-bar { background:#101419; color:#f4f3ef; padding:10px 16px; font-size:.82rem; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:10px; text-align:center; }
+    .kova-bar a { background:#10b981; color:#051610; font-weight:700; padding:4px 12px; border-radius:999px; font-size:.76rem; }
+    .wrap { width:min(1080px,92%); margin:0 auto; }
+    .hero { background:linear-gradient(135deg,#2a1912 0%,#5b2e1b 60%,#924b2d 100%); color:#fffaf4; padding:48px 0 54px; }
+    .hero-top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:28px; }
+    .logo { font-family:'Fraunces',serif; font-size:1.5rem; font-weight:700; }
+    .pill { background:rgba(255,255,255,.15); padding:6px 14px; border-radius:999px; font-size:.82rem; font-weight:600; }
+    .hero h1 { font-size:clamp(2rem,4.3vw,3.1rem); max-width:680px; margin-bottom:12px; }
+    .hero p { max-width:560px; opacity:.9; margin:0 0 22px; }
+    .badges { display:flex; flex-wrap:wrap; gap:10px; font-size:.83rem; }
+    .badges span { background:rgba(0,0,0,.24); border:1px solid rgba(255,255,255,.18); padding:6px 12px; border-radius:999px; }
+    .layout { display:grid; grid-template-columns:1fr 350px; gap:28px; margin-top:30px; align-items:start; }
+    .notice { background:#fff7ec; border:1px solid #f0d7b4; color:#6b441f; border-radius:12px; padding:10px 14px; font-size:.83rem; margin-bottom:18px; }
+    .filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+    .fbtn { border:1px solid var(--border); background:#fff; color:var(--muted); padding:8px 14px; border-radius:999px; font-weight:600; font-size:.86rem; cursor:pointer; }
+    .fbtn.active { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .card { background:#fff; border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+    .art { height:106px; padding:14px; display:flex; justify-content:space-between; align-items:flex-start; color:#fff; font-size:2.1rem; }
+    .a1 { background:linear-gradient(135deg,#7a4824,#c27f42); }
+    .a2 { background:linear-gradient(135deg,#8f4424,#d38646); }
+    .a3 { background:linear-gradient(135deg,#5a2730,#a34c58); }
+    .a4 { background:linear-gradient(135deg,#2e4a3d,#56826c); }
+    .tag { background:rgba(0,0,0,.3); font-size:.7rem; font-weight:700; padding:4px 10px; border-radius:999px; }
+    .info { padding:15px; display:flex; flex-direction:column; flex:1; }
+    .info h3 { font-size:1.1rem; margin-bottom:6px; }
+    .info p { color:var(--muted); font-size:.85rem; margin:0 0 14px; flex:1; }
+    .bot { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .price { font-weight:700; font-size:1.02rem; }
+    .add { background:var(--accent); color:#fff; border:none; border-radius:10px; padding:8px 13px; font-weight:700; font-size:.84rem; cursor:pointer; }
+    .add:hover { background:var(--accent-d); }
+    .cart { position:sticky; top:18px; background:#fff; border:1px solid var(--border); border-radius:18px; padding:20px; box-shadow:0 14px 32px rgba(36,25,20,.07); }
+    .cart h2 { font-size:1.3rem; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; }
+    .cnt { background:var(--accent); color:#fff; font-family:'DM Sans',sans-serif; font-size:.8rem; padding:3px 10px; border-radius:999px; }
+    .items { display:flex; flex-direction:column; gap:10px; max-height:220px; overflow-y:auto; margin-bottom:14px; }
+    .empty { text-align:center; color:var(--muted); font-size:.88rem; padding:16px 8px; background:var(--bg); border-radius:12px; }
+    .row { display:flex; justify-content:space-between; align-items:center; gap:8px; padding-bottom:9px; border-bottom:1px solid var(--border); font-size:.86rem; }
+    .qty { display:flex; align-items:center; gap:6px; }
+    .qbtn { width:24px; height:24px; border-radius:6px; border:1px solid var(--border); background:var(--bg); font-weight:700; cursor:pointer; }
+    .fg { margin-bottom:10px; }
+    .fg label { display:block; font-size:.78rem; font-weight:700; color:var(--muted); margin-bottom:4px; }
+    .fg input, .fg select { width:100%; padding:9px 11px; border:1px solid var(--border); border-radius:9px; font-family:inherit; font-size:.88rem; }
+    .tot { display:flex; justify-content:space-between; font-size:1.12rem; font-weight:800; padding:11px 0; border-top:1px solid var(--border); margin-top:4px; }
+    .wa { width:100%; background:var(--green); color:#fff; border:none; border-radius:12px; padding:13px 14px; font-weight:700; font-size:.94rem; cursor:pointer; }
+    .wa:disabled { opacity:.45; cursor:not-allowed; }
+    .modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; place-items:center; padding:16px; z-index:100; }
+    .modal-bg.open { display:grid; }
+    .modal { background:#fff; border-radius:18px; padding:22px; width:min(460px,100%); }
+    .modal pre { background:#edf7f1; border:1px solid #bde3cc; border-radius:12px; padding:13px; white-space:pre-wrap; font-family:inherit; font-size:.86rem; color:#143627; margin:12px 0 16px; }
+    .mact { display:flex; gap:10px; }
+    .bsec { flex:1; background:#eee; border:none; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; }
+    @media(max-width:900px){ .layout,.grid{ grid-template-columns:1fr; } .cart{ position:static; } }
+  </style>
+</head>
+<body>
+  <div class="kova-bar">
+    <span><strong>Muestra gratuita armada por Kova Digital para Banti Horneados</strong> · Activá tu web en 48 hs</span>
+    <a href="https://wa.me/5491157411630?text=Hola%20Kova%20Digital!%20Vi%20la%20demo%20de%20Banti%20Horneados%20y%20quiero%20activarla." target="_blank" rel="noopener noreferrer">Activar esta web →</a>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="logo">Banti · Horneados Artesanales</div>
+        <div class="pill">★ 4.7 en Google · Temperley</div>
+      </div>
+      <h1>Masa madre de larga fermentación, rolls y pastelería artesanal en Temperley.</h1>
+      <p>Armá tu pedido de horneados, tartas o catering en 30 segundos y envialo directo a nuestro WhatsApp. Sin intermediarios ni comisiones.</p>
+      <div class="badges">
+        <span>📍 Miguel Estanislao Soler 611, Temperley</span>
+        <span>📸 @bantihorneados</span>
+        <span>🥖 Retiro en local y encargos</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap layout">
+    <section>
+      <div class="notice"><strong>Muestra interactiva:</strong> Los precios son referenciales de ejemplo; al activar la web cargamos tus valores y fotos reales en el día.</div>
+      <div class="filters">
+        <button class="fbtn active" data-c="todos">Todos</button>
+        <button class="fbtn" data-c="pan">Masa Madre</button>
+        <button class="fbtn" data-c="dulce">Rolls & Dulces</button>
+        <button class="fbtn" data-c="tortas">Tartas & Petit Gateaux</button>
+        <button class="fbtn" data-c="catering">Catering</button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <aside class="cart">
+      <h2>Tu Pedido <span class="cnt" id="cnt">0</span></h2>
+      <div class="items" id="items"><div class="empty">Sumá horneados del catálogo para armar tu pedido directo a WhatsApp.</div></div>
+      <div class="fg"><label for="name">Tu nombre</label><input id="name" placeholder="Ej: Lucía Pereyra" /></div>
+      <div class="fg"><label for="mode">Retiro / Entrega</label><select id="mode"><option>Retiro por Soler 611 (Temperley)</option><option>Consultar envío en zona</option></select></div>
+      <div class="fg"><label for="day">Día deseado de retiro</label><input id="day" placeholder="Ej: Sábado por la mañana" /></div>
+      <div class="fg"><label for="pay">Medio de pago</label><select id="pay"><option>Transferencia / Mercado Pago</option><option>Efectivo</option></select></div>
+      <div class="tot"><span>Subtotal ref.</span><span id="tot">$0</span></div>
+      <button class="wa" id="send" disabled>Enviar pedido por WhatsApp →</button>
+    </aside>
+  </main>
+
+  <div class="modal-bg" id="mbg">
+    <div class="modal">
+      <h3>Pedido listo para enviar a Banti</h3>
+      <p style="color:#6f5d52;font-size:.88rem;margin:6px 0 0;">Así reciben el pedido ordenado en su WhatsApp, sin responder 10 mensajes previos.</p>
+      <pre id="pre"></pre>
+      <div class="mact">
+        <button class="bsec" id="cls">Cerrar</button>
+        <a class="wa" id="go" href="#" target="_blank" rel="noopener noreferrer" style="text-align:center;flex:1.4;">Abrir en WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WA = '5491133990232';
+    const P = [
+      { id:1, n:'Pan de Campo Masa Madre', d:'Fermentación lenta natural, corteza crocante y miga húmeda.', p:6500, c:'pan', i:'🥖', t:'MASA MADRE', a:'a1' },
+      { id:2, n:'Roll de Canela y Manzana', d:'Masa brioche artesanal glaseada, especialidad de la casa.', p:4200, c:'dulce', i:'🥐', t:'FAVORITO', a:'a2' },
+      { id:3, n:'Box x4 Rolls Artesanales', d:'Ideal para compartir el fin de semana o regalar.', p:15500, c:'dulce', i:'🧁', t:'BOX', a:'a2' },
+      { id:4, n:'Tarta de Limón Artesanal', d:'Masa sablée, crema cítrica equilibrada y merengue dorado.', p:26000, c:'tortas', i:'🍋', t:'A PEDIDO', a:'a3' },
+      { id:5, n:'Caja Petit Gateaux x6', d:'Selección de pastelería francesa individual recién horneada.', p:24000, c:'tortas', i:'🍰', t:'PASTELERÍA', a:'a3' },
+      { id:6, n:'Box Cookies & Muffins x6', d:'Mix de cookies artesanales y muffins de temporada.', p:16500, c:'dulce', i:'🍪', t:'DULCE', a:'a2' },
+      { id:7, n:'Pan Dulce Artesanal (Estacional)', d:'Elaboración lenta con frutos secos y cascaritas.', p:22000, c:'pan', i:'🍞', t:'ESPECIAL', a:'a1' },
+      { id:8, n:'Catering Dulce & Salado (10 pers.)', d:'Bandeja armada para reuniones, oficinas o eventos en Temperley.', p:68000, c:'catering', i:'🥂', t:'EVENTOS', a:'a4' }
+    ];
+    const cart = new Map();
+    let cat = 'todos';
+    const fmt = n => '$' + n.toLocaleString('es-AR');
+    function renderP() {
+      const list = cat === 'todos' ? P : P.filter(x => x.c === cat);
+      document.getElementById('grid').innerHTML = list.map(x => `
+        <article class="card">
+          <div class="art ${x.a}"><span>${x.i}</span><span class="tag">${x.t}</span></div>
+          <div class="info"><h3>${x.n}</h3><p>${x.d}</p>
+          <div class="bot"><span class="price">${fmt(x.p)}</span><button class="add" onclick="add(${x.id})">+ Agregar</button></div></div>
+        </article>`).join('');
+    }
+    window.add = id => { cart.set(id, (cart.get(id)||0)+1); renderC(); };
+    window.chg = (id,d) => { const v=(cart.get(id)||0)+d; v<=0 ? cart.delete(id) : cart.set(id,v); renderC(); };
+    function renderC() {
+      let c=0, t=0, h='';
+      cart.forEach((q,id)=>{ const x=P.find(k=>k.id===id); c+=q; t+=x.p*q; h+=`<div class="row"><div><strong>${x.n}</strong><br><span style="color:#6f5d52">${fmt(x.p*q)}</span></div><div class="qty"><button class="qbtn" onclick="chg(${id},-1)">-</button><span>${q}</span><button class="qbtn" onclick="chg(${id},1)">+</button></div></div>`; });
+      document.getElementById('cnt').textContent = c;
+      document.getElementById('tot').textContent = fmt(t);
+      document.getElementById('send').disabled = c === 0;
+      document.getElementById('items').innerHTML = c ? h : '<div class="empty">Sumá horneados del catálogo para armar tu pedido directo a WhatsApp.</div>';
+    }
+    document.querySelectorAll('.fbtn').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.fbtn').forEach(k => k.classList.remove('active'));
+      b.classList.add('active'); cat = b.dataset.c; renderP();
+    }));
+    document.getElementById('send').addEventListener('click', () => {
+      const nm = document.getElementById('name').value.trim() || 'Cliente';
+      const md = document.getElementById('mode').value;
+      const dy = document.getElementById('day').value.trim() || 'A coordinar';
+      const py = document.getElementById('pay').value;
+      let t = 0, lines = [`Hola Banti Horneados! Soy ${nm} y quiero consultar/encargar:`];
+      cart.forEach((q,id)=>{ const x=P.find(k=>k.id===id); t+=x.p*q; lines.push(`• ${q}x ${x.n}`); });
+      lines.push('', `Modalidad: ${md}`, `Retiro/Fecha: ${dy}`, `Pago: ${py}`, `Subtotal ref.: ${fmt(t)}`);
+      const m = lines.join('\n');
+      document.getElementById('pre').textContent = m;
+      document.getElementById('go').href = `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+      document.getElementById('mbg').classList.add('open');
+    });
+    document.getElementById('cls').addEventListener('click', () => document.getElementById('mbg').classList.remove('open'));
+    renderP(); renderC();
+  </script>
+</body>
+</html>

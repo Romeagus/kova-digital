@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panadería y Confitería Bruzzone — Pre-Pedidos Directos | Glew</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#f9f5ee; --card:#fff; --ink:#1f1916; --muted:#63574f; --accent:#9e3f27; --accent-d:#7e301d; --green:#1a6b4b; --border:#e6dccf; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:'DM Sans',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; padding-bottom:80px; }
+    h1,h2,h3 { font-family:'Fraunces',Georgia,serif; margin:0; line-height:1.15; }
+    a { color:inherit; text-decoration:none; }
+    .kova-bar { background:#101419; color:#f4f3ef; padding:10px 16px; font-size:.82rem; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:10px; text-align:center; }
+    .kova-bar a { background:#10b981; color:#051610; font-weight:700; padding:4px 12px; border-radius:999px; font-size:.76rem; }
+    .wrap { width:min(1080px,92%); margin:0 auto; }
+    .hero { background:linear-gradient(135deg,#241512 0%,#57251a 58%,#8d3b27 100%); color:#fffaf3; padding:48px 0 54px; }
+    .hero-top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:28px; }
+    .logo { font-family:'Fraunces',serif; font-size:1.5rem; font-weight:700; }
+    .pill { background:rgba(255,255,255,.15); padding:6px 14px; border-radius:999px; font-size:.82rem; font-weight:600; }
+    .hero h1 { font-size:clamp(2rem,4.3vw,3.1rem); max-width:690px; margin-bottom:12px; }
+    .hero p { max-width:560px; opacity:.92; margin:0 0 22px; }
+    .badges { display:flex; flex-wrap:wrap; gap:10px; font-size:.83rem; }
+    .badges span { background:rgba(0,0,0,.24); border:1px solid rgba(255,255,255,.18); padding:6px 12px; border-radius:999px; }
+    .layout { display:grid; grid-template-columns:1fr 350px; gap:28px; margin-top:30px; align-items:start; }
+    .notice { background:#fff7ec; border:1px solid #f0d7b4; color:#6b441f; border-radius:12px; padding:10px 14px; font-size:.83rem; margin-bottom:18px; }
+    .filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+    .fbtn { border:1px solid var(--border); background:#fff; color:var(--muted); padding:8px 14px; border-radius:999px; font-weight:600; font-size:.86rem; cursor:pointer; }
+    .fbtn.active { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .card { background:#fff; border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+    .art { height:106px; padding:14px; display:flex; justify-content:space-between; align-items:flex-start; color:#fff; font-size:2.1rem; }
+    .a1 { background:linear-gradient(135deg,#6f341f,#b8603a); }
+    .a2 { background:linear-gradient(135deg,#8d5620,#cf8f3c); }
+    .a3 { background:linear-gradient(135deg,#5a222b,#9c3e4d); }
+    .a4 { background:linear-gradient(135deg,#2d483a,#557d67); }
+    .tag { background:rgba(0,0,0,.3); font-size:.7rem; font-weight:700; padding:4px 10px; border-radius:999px; }
+    .info { padding:15px; display:flex; flex-direction:column; flex:1; }
+    .info h3 { font-size:1.1rem; margin-bottom:6px; }
+    .info p { color:var(--muted); font-size:.85rem; margin:0 0 14px; flex:1; }
+    .bot { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .price { font-weight:700; font-size:1.02rem; }
+    .add { background:var(--accent); color:#fff; border:none; border-radius:10px; padding:8px 13px; font-weight:700; font-size:.84rem; cursor:pointer; }
+    .add:hover { background:var(--accent-d); }
+    .cart { position:sticky; top:18px; background:#fff; border:1px solid var(--border); border-radius:18px; padding:20px; box-shadow:0 14px 32px rgba(31,25,22,.07); }
+    .cart h2 { font-size:1.3rem; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; }
+    .cnt { background:var(--accent); color:#fff; font-family:'DM Sans',sans-serif; font-size:.8rem; padding:3px 10px; border-radius:999px; }
+    .items { display:flex; flex-direction:column; gap:10px; max-height:220px; overflow-y:auto; margin-bottom:14px; }
+    .empty { text-align:center; color:var(--muted); font-size:.88rem; padding:16px 8px; background:var(--bg); border-radius:12px; }
+    .row { display:flex; justify-content:space-between; align-items:center; gap:8px; padding-bottom:9px; border-bottom:1px solid var(--border); font-size:.86rem; }
+    .qty { display:flex; align-items:center; gap:6px; }
+    .qbtn { width:24px; height:24px; border-radius:6px; border:1px solid var(--border); background:var(--bg); font-weight:700; cursor:pointer; }
+    .fg { margin-bottom:10px; }
+    .fg label { display:block; font-size:.78rem; font-weight:700; color:var(--muted); margin-bottom:4px; }
+    .fg input, .fg select { width:100%; padding:9px 11px; border:1px solid var(--border); border-radius:9px; font-family:inherit; font-size:.88rem; }
+    .tot { display:flex; justify-content:space-between; font-size:1.12rem; font-weight:800; padding:11px 0; border-top:1px solid var(--border); margin-top:4px; }
+    .wa { width:100%; background:var(--green); color:#fff; border:none; border-radius:12px; padding:13px 14px; font-weight:700; font-size:.94rem; cursor:pointer; }
+    .wa:disabled { opacity:.45; cursor:not-allowed; }
+    .modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; place-items:center; padding:16px; z-index:100; }
+    .modal-bg.open { display:grid; }
+    .modal { background:#fff; border-radius:18px; padding:22px; width:min(460px,100%); }
+    .modal pre { background:#edf7f1; border:1px solid #bde3cc; border-radius:12px; padding:13px; white-space:pre-wrap; font-family:inherit; font-size:.86rem; color:#143627; margin:12px 0 16px; }
+    .mact { display:flex; gap:10px; }
+    .bsec { flex:1; background:#eee; border:none; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; }
+    @media(max-width:900px){ .layout,.grid{ grid-template-columns:1fr; } .cart{ position:static; } }
+  </style>
+</head>
+<body>
+  <div class="kova-bar">
+    <span><strong>Muestra gratuita armada por Kova Digital para Panadería Bruzzone</strong> · Activá tu web en 48 hs</span>
+    <a href="https://wa.me/5491157411630?text=Hola%20Kova%20Digital!%20Vi%20la%20demo%20de%20Bruzzone%20y%20quiero%20activarla." target="_blank" rel="noopener noreferrer">Activar esta web →</a>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="logo">Panadería & Confitería Bruzzone</div>
+        <div class="pill">★ 4.8 en Google · Glew</div>
+      </div>
+      <h1>Encargá tus sándwiches de miga, chipá y tortas y retirá sin hacer fila.</h1>
+      <p>Elegí tus clásicos de Bruzzone desde el celular y mandá tu pre-pedido directo a nuestro WhatsApp. Sin intermediarios ni comisiones.</p>
+      <div class="badges">
+        <span>📍 Gervasio Méndez 206, Glew (cerca Museo Soldi)</span>
+        <span>📸 @bruzzone_panaderia</span>
+        <span>⚡ Retiro rápido en mostrador</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap layout">
+    <section>
+      <div class="notice"><strong>Muestra interactiva:</strong> Precios de ejemplo para probar el carrito; al activar el sitio cargamos la lista de precios real de Bruzzone.</div>
+      <div class="filters">
+        <button class="fbtn active" data-c="todos">Todos</button>
+        <button class="fbtn" data-c="miga">Sándwiches & Salado</button>
+        <button class="fbtn" data-c="pan">Chipá & Panificados</button>
+        <button class="fbtn" data-c="tortas">Tortas & Postres</button>
+        <button class="fbtn" data-c="comida">Platos para llevar</button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <aside class="cart">
+      <h2>Tu Pre-Pedido <span class="cnt" id="cnt">0</span></h2>
+      <div class="items" id="items"><div class="empty">Agregá productos para reservar y retirar rápido por Gervasio Méndez 206.</div></div>
+      <div class="fg"><label for="name">Tu nombre</label><input id="name" placeholder="Ej: Diego Morales" /></div>
+      <div class="fg"><label for="hora">Horario estimado de retiro</label><select id="hora"><option>Hoy a la mañana (09:00 - 12:30)</option><option>Hoy a la tarde (16:00 - 20:00)</option><option>Encargo para fin de semana / evento</option></select></div>
+      <div class="fg"><label for="pay">Medio de pago</label><select id="pay"><option>Transferencia / Mercado Pago</option><option>Efectivo al retirar</option></select></div>
+      <div class="tot"><span>Total ref.</span><span id="tot">$0</span></div>
+      <button class="wa" id="send" disabled>Enviar pre-pedido por WhatsApp →</button>
+    </aside>
+  </main>
+
+  <div class="modal-bg" id="mbg">
+    <div class="modal">
+      <h3>Pre-pedido listo para WhatsApp</h3>
+      <p style="color:#63574f;font-size:.88rem;margin:6px 0 0;">Descomprimí las filas del fin de semana recibiendo encargos armados.</p>
+      <pre id="pre"></pre>
+      <div class="mact">
+        <button class="bsec" id="cls">Cerrar</button>
+        <a class="wa" id="go" href="#" target="_blank" rel="noopener noreferrer" style="text-align:center;flex:1.4;">Abrir en WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WA = '5491153379763';
+    const P = [
+      { id:1, n:'24 Sándwiches de Miga Surtidos', d:'Jamón y queso, tomate, huevo, aceitunas y primavera en pan fresco.', p:32000, c:'miga', i:'🥪', t:'CLÁSICO GLEW', a:'a1' },
+      { id:2, n:'1/2 Kg de Chipá Recién Horneado', d:'Bien quesoso y tibio, uno de los más pedidos del local.', p:9800, c:'pan', i:'🧀', t:'MÁS PEDIDO', a:'a2' },
+      { id:3, n:'Docena de Empanadas Caseras', d:'Carne cortada, jamón y queso, pollo y verdura.', p:18500, c:'miga', i:'🥟', t:'AL HORNO', a:'a1' },
+      { id:4, n:'Tiramisú Artesanal (Entero / Porc.)', d:'Postre clásico de la casa con mascarpone y café.', p:24500, c:'tortas', i:'🍮', t:'POSTRE', a:'a3' },
+      { id:5, n:'Torta de Confitería por Encargo', d:'Selva negra, Rogel, Balcarce o Lemon Pie (10-12 porciones).', p:31000, c:'tortas', i:'🎂', t:'ENCARGO', a:'a3' },
+      { id:6, n:'Docena de Facturas & Medialunas', d:'Surtido recién horneado ideal para el mate o desayuno.', p:11000, c:'pan', i:'🥐', t:'HORNEADO HOY', a:'a2' },
+      { id:7, n:'Bandeja de Platos Elaborados', d:'Tartas, milanesas y comidas caseras listas para llevar.', p:12500, c:'comida', i:'🍽️', t:'ALMUERZO/CENA', a:'a4' },
+      { id:8, n:'Combo Cumpleaños (48 Miga + Torta)', d:'Todo resuelto en un pedido para tus reuniones en Glew.', p:89000, c:'miga', i:'🎉', t:'EVENTOS', a:'a4' }
+    ];
+    const cart = new Map();
+    let cat = 'todos';
+    const fmt = n => '$' + n.toLocaleString('es-AR');
+    function renderP() {
+      const list = cat === 'todos' ? P : P.filter(x => x.c === cat);
+      document.getElementById('grid').innerHTML = list.map(x => `
+        <article class="card">
+          <div class="art ${x.a}"><span>${x.i}</span><span class="tag">${x.t}</span></div>
+          <div class="info"><h3>${x.n}</h3><p>${x.d}</p>
+          <div class="bot"><span class="price">${fmt(x.p)}</span><button class="add" onclick="add(${x.id})">+ Agregar</button></div></div>
+        </article>`).join('');
+    }
+    window.add = id => { cart.set(id, (cart.get(id)||0)+1); renderC(); };
+    window.chg = (id,d) => { const v=(cart.get(id)||0)+d; v<=0 ? cart.delete(id) : cart.set(id,v); renderC(); };
+    function renderC() {
+      let c=0, t=0, h='';
+      cart.forEach((q,id)=>{ const x=P.find(k=>k.id===id); c+=q; t+=x.p*q; h+=`<div class="row"><div><strong>${x.n}</strong><br><span style="color:#63574f">${fmt(x.p*q)}</span></div><div class="qty"><button class="qbtn" onclick="chg(${id},-1)">-</button><span>${q}</span><button class="qbtn" onclick="chg(${id},1)">+</button></div></div>`; });
+      document.getElementById('cnt').textContent = c;
+      document.getElementById('tot').textContent = fmt(t);
+      document.getElementById('send').disabled = c === 0;
+      document.getElementById('items').innerHTML = c ? h : '<div class="empty">Agregá productos para reservar y retirar rápido por Gervasio Méndez 206.</div>';
+    }
+    document.querySelectorAll('.fbtn').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.fbtn').forEach(k => k.classList.remove('active'));
+      b.classList.add('active'); cat = b.dataset.c; renderP();
+    }));
+    document.getElementById('send').addEventListener('click', () => {
+      const nm = document.getElementById('name').value.trim() || 'Cliente';
+      const hr = document.getElementById('hora').value;
+      const py = document.getElementById('pay').value;
+      let t = 0, lines = [`Hola Panadería Bruzzone! Soy ${nm} y quiero hacer este pre-pedido:`];
+      cart.forEach((q,id)=>{ const x=P.find(k=>k.id===id); t+=x.p*q; lines.push(`• ${q}x ${x.n}`); });
+      lines.push('', `Retiro: ${hr}`, `Pago: ${py}`, `Total ref.: ${fmt(t)}`);
+      const m = lines.join('\n');
+      document.getElementById('pre').textContent = m;
+      document.getElementById('go').href = `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+      document.getElementById('mbg').classList.add('open');
+    });
+    document.getElementById('cls').addEventListener('click', () => document.getElementById('mbg').classList.remove('open'));
+    renderP(); renderC();
+  </script>
+</body>
+</html>

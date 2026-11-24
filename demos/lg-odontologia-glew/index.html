@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LG Odontología Salud & Estética — Turnos Online 24/7 | Glew</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#f4f8f8; --card:#fff; --ink:#102329; --muted:#546a71; --accent:#0e7c7b; --accent-d:#0a5e5d; --border:#d7e5e6; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:'Plus Jakarta Sans',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.55; padding-bottom:96px; }
+    h1,h2,h3 { margin:0; line-height:1.15; letter-spacing:-.02em; }
+    a { color:inherit; text-decoration:none; }
+    .kova-bar { background:#101419; color:#f4f3ef; padding:10px 16px; font-size:.82rem; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:10px; text-align:center; }
+    .kova-bar a { background:#10b981; color:#051610; font-weight:700; padding:4px 12px; border-radius:999px; font-size:.76rem; }
+    .wrap { width:min(1060px,92%); margin:0 auto; }
+    .hero { background:linear-gradient(135deg,#0b252c 0%,#0f4c55 58%,#137476 100%); color:#f7fbfb; padding:52px 0 60px; }
+    .top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:34px; }
+    .logo { font-size:1.35rem; font-weight:800; }
+    .pill { background:rgba(255,255,255,.15); padding:6px 14px; border-radius:999px; font-size:.82rem; font-weight:600; }
+    .hero h1 { font-size:clamp(2rem,4.4vw,3.2rem); max-width:660px; margin-bottom:14px; }
+    .hero p { max-width:560px; opacity:.92; margin:0 0 24px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 22px; border-radius:11px; font-weight:700; cursor:pointer; border:none; font-size:.92rem; background:#14b8a6; color:#04201f; }
+    .btn:hover { background:#0d9488; color:#fff; }
+    .grid { display:grid; grid-template-columns:1.05fr .95fr; gap:30px; margin-top:38px; align-items:start; }
+    .stitle { font-size:1.65rem; margin-bottom:14px; }
+    .notice { background:#eef8f8; border:1px solid #bde0e0; color:#144d50; border-radius:12px; padding:10px 14px; font-size:.82rem; margin-bottom:16px; }
+    .slist { display:flex; flex-direction:column; gap:12px; }
+    .scard { background:#fff; border:1px solid var(--border); border-radius:14px; padding:16px 18px; display:flex; justify-content:space-between; align-items:center; gap:12px; cursor:pointer; }
+    .scard.sel { border-color:var(--accent); box-shadow:0 8px 22px rgba(14,124,123,.14); }
+    .scard h3 { font-size:1rem; margin-bottom:4px; }
+    .scard p { margin:0; font-size:.84rem; color:var(--muted); }
+    .badge { background:#e6f4f4; color:var(--accent-d); font-size:.74rem; font-weight:700; padding:4px 10px; border-radius:999px; white-space:nowrap; }
+    .bcard { background:#fff; border:1px solid var(--border); border-radius:20px; padding:24px; box-shadow:0 16px 36px rgba(16,35,41,.07); }
+    .bcard h2 { font-size:1.5rem; margin-bottom:6px; }
+    .sub { color:var(--muted); font-size:.86rem; margin:0 0 16px; }
+    .f { margin-bottom:13px; }
+    .f label { display:block; font-size:.76rem; font-weight:700; color:var(--muted); margin-bottom:5px; text-transform:uppercase; }
+    .f input, .f select { width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:10px; font-family:inherit; font-size:.9rem; }
+    .slots { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .slot { padding:9px; border-radius:9px; border:1px solid var(--border); background:var(--bg); font-weight:600; font-size:.84rem; cursor:pointer; }
+    .slot.act { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .cbox { display:none; margin-top:14px; padding:14px; border-radius:12px; background:#eef8f2; border:1px solid #b8e2c9; color:#143827; font-size:.86rem; }
+    .cbox.show { display:block; }
+    .fab { position:fixed; right:18px; bottom:18px; background:var(--ink); color:#fff; border:none; border-radius:999px; padding:13px 18px; font-weight:700; font-size:.88rem; box-shadow:0 12px 28px rgba(0,0,0,.25); cursor:pointer; display:flex; align-items:center; gap:8px; z-index:90; }
+    .dot { width:9px; height:9px; border-radius:50%; background:#14b8a6; }
+    .chat { position:fixed; right:18px; bottom:78px; width:min(345px,calc(100vw - 32px)); background:#fff; border:1px solid var(--border); border-radius:18px; box-shadow:0 22px 50px rgba(0,0,0,.22); display:none; flex-direction:column; overflow:hidden; z-index:95; }
+    .chat.open { display:flex; }
+    .chead { background:var(--ink); color:#fff; padding:13px 15px; display:flex; justify-content:space-between; align-items:center; }
+    .chead strong { display:block; font-size:.9rem; }
+    .chead span { font-size:.73rem; color:#99f6e4; }
+    .cmsgs { padding:13px; height:235px; overflow-y:auto; display:flex; flex-direction:column; gap:9px; background:#f5fafa; }
+    .msg { padding:9px 12px; border-radius:12px; font-size:.84rem; max-width:88%; }
+    .bot { background:#fff; border:1px solid var(--border); align-self:flex-start; }
+    .usr { background:var(--accent); color:#fff; align-self:flex-end; }
+    .qr { display:flex; flex-wrap:wrap; gap:6px; padding:8px 12px; border-top:1px solid var(--border); }
+    .qr button { border:1px solid var(--border); background:var(--bg); font-size:.74rem; padding:5px 9px; border-radius:999px; cursor:pointer; }
+    .crow { display:flex; border-top:1px solid var(--border); }
+    .crow input { flex:1; border:none; padding:11px; font-family:inherit; font-size:.86rem; outline:none; }
+    .crow button { background:var(--ink); color:#fff; border:none; padding:0 15px; font-weight:700; cursor:pointer; }
+    @media(max-width:880px){ .grid{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="kova-bar">
+    <span><strong>Muestra gratuita armada por Kova Digital para LG Odontología (Glew)</strong> · Reemplazá tu Linktree por una web clínica + IA</span>
+    <a href="https://wa.me/5491157411630?text=Hola%20Kova%20Digital!%20Vi%20la%20demo%20de%20LG%20Odontologia%20y%20quiero%20activarla." target="_blank" rel="noopener noreferrer">Activar esta web →</a>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="top">
+        <div class="logo">LG Odontología · Salud & Estética</div>
+        <div class="pill">Dra. Laura Giménez y equipo · Sarmiento 363, Glew</div>
+      </div>
+      <h1>Odontología integral, ortodoncia, implantes y estética dental con calidez humana.</h1>
+      <p>Atención personalizada para niños, adultos y atención especializada adaptada. Solicitá tu turno online las 24 horas en menos de 1 minuto.</p>
+      <a href="#turnos" class="btn">Solicitar turno online →</a>
+    </div>
+  </header>
+
+  <main class="wrap grid" id="turnos">
+    <section>
+      <h2 class="stitle">1. Seleccioná la especialidad</h2>
+      <div class="notice"><strong>Muestra clínica interactiva:</strong> Reemplaza un Linktree básico por presencia profesional en Google + turnero + asistente virtual 24/7.</div>
+      <div class="slist" id="slist"></div>
+    </section>
+
+    <section class="bcard">
+      <h2>2. Solicitá tu turno</h2>
+      <p class="sub">Confirmación directa con secretaría por WhatsApp.</p>
+      <div class="f"><label>Especialidad</label><input id="selS" readonly /></div>
+      <div class="f"><label for="cov">Cobertura</label><select id="cov"><option>Particular</option><option>Consultar Obra Social / Prepaga</option></select></div>
+      <div class="f"><label for="bdate">Día preferido</label><select id="bdate"></select></div>
+      <div class="f"><label>Franja horaria</label>
+        <div class="slots"><button type="button" class="slot act">09:30</button><button type="button" class="slot">11:00</button><button type="button" class="slot">14:30</button><button type="button" class="slot">16:00</button><button type="button" class="slot">17:30</button><button type="button" class="slot">19:00</button></div>
+      </div>
+      <div class="f"><label for="cname">Nombre del paciente</label><input id="cname" placeholder="Ej: Juan Pablo Ruiz" /></div>
+      <button class="btn" style="width:100%;" id="conf">Confirmar turno por WhatsApp →</button>
+      <div class="cbox" id="cbox"></div>
+    </section>
+  </main>
+
+  <button class="fab" id="fab"><span class="dot"></span>Asistente IA · Consultorio 24/7</button>
+  <div class="chat" id="chat">
+    <div class="chead"><div><strong>Asistente Virtual LG Odontología</strong><span>● Respuesta inmediata 24/7</span></div><button style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;" id="ccls">×</button></div>
+    <div class="cmsgs" id="cmsgs"><div class="msg bot">¡Hola! Soy el asistente virtual de LG Odontología (Sarmiento 363, Glew). Consultame por especialidades, ubicación, atención a niños o cómo pedir turno.</div></div>
+    <div class="qr">
+      <button data-q="¿Dónde queda el consultorio?">Ubicación</button>
+      <button data-q="¿Hacen ortodoncia e implantes?">Ortodoncia/Implantes</button>
+      <button data-q="¿Atienden niños?">Odontopediatría</button>
+      <button data-q="¿Cómo saco turno?">Pedir turno</button>
+    </div>
+    <div class="crow"><input id="cin" placeholder="Escribí tu consulta..." /><button id="csnd">Enviar</button></div>
+  </div>
+
+  <script>
+    const WA = '5491125167100';
+    const S = [
+      { id:1, n:'Consulta & Diagnóstico Integral', d:'Control general, evaluación clínica y plan de tratamiento personalizado.', b:'NIÑOS Y ADULTOS' },
+      { id:2, n:'Ortodoncia', d:'Evaluación de alineación dental y seguimiento personalizado.', b:'ESPECIALIDAD' },
+      { id:3, n:'Implantes Dentales & Rehabilitación', d:'Recuperación funcional y estética con planificación digital.', b:'ALTA COMPLEJIDAD' },
+      { id:4, n:'Estética Dental', d:'Blanqueamiento, carillas y armonización de la sonrisa.', b:'ESTÉTICA' },
+      { id:5, n:'Odontopediatría & Atención Adaptada', d:'Cuidado especializado para niños y pacientes con discapacidad.', b:'CUIDADO HUMANO' }
+    ];
+    let cur = S[0], slot = '09:30';
+    function renderS() {
+      document.getElementById('slist').innerHTML = S.map(x => `<article class="scard ${x.id===cur.id?'sel':''}" onclick="pick(${x.id})"><div><h3>${x.n}</h3><p>${x.d}</p></div><span class="badge">${x.b}</span></article>`).join('');
+      document.getElementById('selS').value = cur.n;
+    }
+    window.pick = id => { cur = S.find(x => x.id === id); renderS(); };
+    const ds = document.getElementById('bdate'), dias=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'], mes=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    for (let i=1;i<=7;i++){ const d=new Date(); d.setDate(d.getDate()+i); if(d.getDay()===0) continue; const o=document.createElement('option'); o.textContent=o.value=`${dias[d.getDay()]} ${d.getDate()} ${mes[d.getMonth()]}`; ds.appendChild(o); }
+    document.querySelectorAll('.slot').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.slot').forEach(k=>k.classList.remove('act')); b.classList.add('act'); slot=b.textContent; }));
+    document.getElementById('conf').addEventListener('click',()=>{
+      const nm=document.getElementById('cname').value.trim()||'Paciente';
+      const cov=document.getElementById('cov').value;
+      const msg=`Hola LG Odontología! Soy ${nm} y quiero solicitar turno:\n• Especialidad: ${cur.n}\n• Cobertura: ${cov}\n• Día preferido: ${ds.value}\n• Horario: ${slot} hs`;
+      const u=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+      const bx=document.getElementById('cbox');
+      bx.innerHTML=`<strong>¡Solicitud de turno lista!</strong><br>${cur.n} · ${ds.value} a las ${slot} hs.<br><br><a href="${u}" target="_blank" rel="noopener noreferrer" style="font-weight:700;text-decoration:underline;color:#143827;">Enviar solicitud por WhatsApp →</a>`;
+      bx.classList.add('show');
+    });
+    const chat=document.getElementById('chat'), cmsgs=document.getElementById('cmsgs'), cin=document.getElementById('cin');
+    document.getElementById('fab').addEventListener('click',()=>chat.classList.toggle('open'));
+    document.getElementById('ccls').addEventListener('click',()=>chat.classList.remove('open'));
+    function reply(t){
+      const s=t.toLowerCase();
+      if(s.includes('ubic')||s.includes('donde')||s.includes('dónde')) return 'El consultorio está en Sarmiento 363, Glew (Buenos Aires).';
+      if(s.includes('ortod')||s.includes('implan')||s.includes('estet')) return 'Sí, realizamos ortodoncia, implantes dentales y estética dental. Podés pedir una consulta de diagnóstico arriba en el turnero.';
+      if(s.includes('niñ')||s.includes('pediat')||s.includes('discap')) return 'Contamos con odontopediatría y atención adaptada con enfoque cálido y humano para cada paciente.';
+      return 'Podés elegir la especialidad, tu día preferido y franja horaria en el formulario y enviarlo en 1 clic a nuestro WhatsApp.';
+    }
+    function send(t){
+      if(!t.trim()) return;
+      const u=document.createElement('div'); u.className='msg usr'; u.textContent=t; cmsgs.appendChild(u);
+      setTimeout(()=>{ const b=document.createElement('div'); b.className='msg bot'; b.textContent=reply(t); cmsgs.appendChild(b); cmsgs.scrollTop=cmsgs.scrollHeight; },280);
+      cmsgs.scrollTop=cmsgs.scrollHeight; cin.value='';
+    }
+    document.getElementById('csnd').addEventListener('click',()=>send(cin.value));
+    cin.addEventListener('keydown',e=>{ if(e.key==='Enter') send(cin.value); });
+    document.querySelectorAll('.qr button').forEach(b=>b.addEventListener('click',()=>send(b.dataset.q)));
+    renderS();
+  </script>
+</body>
+</html>
