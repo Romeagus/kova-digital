@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obrador Sur — Panadería Artesanal & Pastelería | Pedidos Directos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #faf6f0;
+      --card: #ffffff;
+      --ink: #231914;
+      --muted: #6c5b51;
+      --accent: #b85d3b;
+      --accent-dark: #97482a;
+      --green: #1d6f4e;
+      --border: #eadfd2;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+      padding-bottom: 90px;
+    }
+    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; margin: 0; line-height: 1.15; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Top demo banner */
+    .kova-banner {
+      background: #101419;
+      color: #f4f3ef;
+      padding: 10px 16px;
+      font-size: 0.84rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      text-align: center;
+    }
+    .kova-banner a {
+      background: #10b981;
+      color: #051610;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+    }
+
+    .container { width: min(1080px, 92%); margin: 0 auto; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #2d1c14 0%, #5c301d 60%, #8c4529 100%);
+      color: #fff9f2;
+      padding: 52px 0 58px;
+    }
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 34px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .shop-logo { font-family: 'Fraunces', serif; font-size: 1.45rem; font-weight: 700; }
+    .shop-status {
+      background: rgba(255,255,255,0.14);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .hero h1 { font-size: clamp(2rem, 4.4vw, 3.2rem); max-width: 680px; margin-bottom: 14px; }
+    .hero p { max-width: 560px; opacity: 0.9; margin: 0 0 24px; font-size: 1.03rem; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.84rem; }
+    .hero-badges span {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
+
+    /* Layout */
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 28px;
+      margin-top: 34px;
+      align-items: start;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .filter-btn {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      padding: 9px 15px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .filter-btn.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.16s ease;
+    }
+    .product-card:hover { box-shadow: 0 12px 28px rgba(35, 25, 20, 0.08); }
+
+    .product-art {
+      height: 118px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      color: #fff;
+      font-size: 2.3rem;
+    }
+    .art-pan { background: linear-gradient(135deg, #7c4a27, #c28044); }
+    .art-facturas { background: linear-gradient(135deg, #9d5324, #d9934c); }
+    .art-tortas { background: linear-gradient(135deg, #5e272d, #a64b52); }
+    .art-eventos { background: linear-gradient(135deg, #334e40, #5b8770); }
+
+    .art-tag {
+      background: rgba(0,0,0,0.3);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    .product-info {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .product-info h3 { font-size: 1.15rem; margin-bottom: 6px; }
+    .product-info p { color: var(--muted); font-size: 0.87rem; margin: 0 0 14px; flex-grow: 1; }
+    .product-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .price { font-weight: 700; font-size: 1.08rem; color: var(--ink); }
+
+    .add-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-weight: 700;
+      font-size: 0.86rem;
+      cursor: pointer;
+    }
+    .add-btn:hover { background: var(--accent-dark); }
+
+    /* Cart Panel */
+    .cart-panel {
+      position: sticky;
+      top: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 16px 36px rgba(35, 25, 20, 0.07);
+    }
+    .cart-panel h2 { font-size: 1.35rem; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .cart-count {
+      background: var(--accent);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 240px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+    .cart-empty {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 18px 8px;
+      background: var(--bg);
+      border-radius: 12px;
+    }
+    .cart-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .qty-controls { display: flex; align-items: center; gap: 6px; }
+    .qty-btn {
+      width: 24px; height: 24px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .form-group { margin-bottom: 11px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 4px; color: var(--muted); }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: #fff;
+    }
+
+    .total-box {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 6px;
+    }
+
+    .wa-btn {
+      width: 100%;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      cursor: pointer;
+    }
+    .wa-btn:hover { background: #16593e; }
+    .wa-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* Modal Preview */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      place-items: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-backdrop.open { display: grid; }
+    .modal {
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      width: min(460px, 100%);
+    }
+    .modal pre {
+      background: #edf7f1;
+      border: 1px solid #bde3cc;
+      border-radius: 12px;
+      padding: 14px;
+      white-space: pre-wrap;
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: #143627;
+      margin: 14px 0 18px;
+    }
+    .modal-actions { display: flex; gap: 10px; }
+    .btn-sec {
+      flex: 1;
+      background: #eee;
+      border: none;
+      border-radius: 10px;
+      padding: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .shop-layout { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .cart-panel { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="kova-banner">
+    <span><strong>Demo Interactiva por Kova Digital</strong> · Así reciben pedidos directos tus clientes sin comisiones</span>
+    <a href="../../index.html">← Volver a Kova Digital</a>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-top">
+        <div class="shop-logo">Obrador Sur · Panadería Artesanal</div>
+        <div class="shop-status">● Abierto hoy · 07:30 a 20:30 hs</div>
+      </div>
+      <h1>Pan de masa madre, facturas recién horneadas y pastelería por encargo.</h1>
+      <p>Elegí tus productos, completá tus datos y enviá tu pedido directo a nuestro WhatsApp. Sin intermediarios ni recargos.</p>
+      <div class="hero-badges">
+        <span>📍 Palermo / Retiro en local</span>
+        <span>🛵 Envío propio en 45 min</span>
+        <span>🎂 Tortas y catering a pedido</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container shop-layout">
+    <section>
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-cat="todos">Todos</button>
+        <button class="filter-btn" data-cat="pan">Panadería</button>
+        <button class="filter-btn" data-cat="facturas">Facturas</button>
+        <button class="filter-btn" data-cat="tortas">Pastelería & Tortas</button>
+        <button class="filter-btn" data-cat="eventos">Sándwiches & Eventos</button>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <aside class="cart-panel" aria-label="Tu pedido">
+      <h2>Tu Pedido <span class="cart-count" id="cartCount">0</span></h2>
+      <div class="cart-items" id="cartItems">
+        <div class="cart-empty">Agregá productos del catálogo para armar tu pedido directo a WhatsApp.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="custName">Tu nombre</label>
+        <input id="custName" type="text" placeholder="Ej: Martín Gómez" />
+      </div>
+      <div class="form-group">
+        <label for="deliveryMode">Modalidad</label>
+        <select id="deliveryMode">
+          <option value="Retiro en local">Retiro en local (Sin cargo)</option>
+          <option value="Envío a domicilio">Envío a domicilio (+ $2.500)</option>
+        </select>
+      </div>
+      <div class="form-group" id="addressGroup" style="display:none;">
+        <label for="custAddress">Dirección de envío</label>
+        <input id="custAddress" type="text" placeholder="Ej: Av. Santa Fe 3240, Piso 4" />
+      </div>
+      <div class="form-group">
+        <label for="payMethod">Medio de pago</label>
+        <select id="payMethod">
+          <option value="Transferencia / Mercado Pago">Transferencia / Mercado Pago</option>
+          <option value="Efectivo">Efectivo</option>
+        </select>
+      </div>
+
+      <div class="total-box">
+        <span>Total</span>
+        <span id="cartTotal">$0</span>
+      </div>
+      <button class="wa-btn" id="sendOrderBtn" disabled>Enviar pedido por WhatsApp →</button>
+    </aside>
+  </main>
+
+  <div class="modal-backdrop" id="previewModal">
+    <div class="modal">
+      <h3>Así llega el pedido a tu WhatsApp</h3>
+      <p style="color:#6c5b51;font-size:0.9rem;margin:6px 0 0;">Listo, calculado y sin comisiones del 28%.</p>
+      <pre id="waMessagePreview"></pre>
+      <div class="modal-actions">
+        <button class="btn-sec" id="closeModalBtn">Cerrar</button>
+        <a class="wa-btn" id="openWaReal" href="#" target="_blank" rel="noopener noreferrer" style="text-align:center;flex:1.4;">Abrir en WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SHOP_WA = '5491157411630'; // Reemplazar con WhatsApp del negocio al clonar demo
+    const DELIVERY_FEE = 2500;
+
+    const PRODUCTS = [
+      { id: 1, name: 'Pan de Campo Masa Madre', desc: 'Fermentación natural 24 hs, corteza crocante (750 g).', price: 5800, cat: 'pan', icon: '🥖', tag: 'HORNEADO HOY', art: 'art-pan' },
+      { id: 2, name: 'Docena de Medialunas de Manteca', desc: 'Hojaldre artesanal con almíbar ligero, recién salidas.', price: 11500, cat: 'facturas', icon: '🥐', tag: 'MÁS PEDIDO', art: 'art-facturas' },
+      { id: 3, name: 'Docena de Facturas Surtidas', desc: 'Dulce de leche, pastelera, membrillo, vigilantes y sacramentos.', price: 12000, cat: 'facturas', icon: '🍩', tag: 'CLÁSICO', art: 'art-facturas' },
+      { id: 4, name: 'Torta Rogel Artesanal (12 porc.)', desc: 'Capas finas crocantes, dulce de leche repostero y merengue italiano.', price: 32000, cat: 'tortas', icon: '🎂', tag: 'A PEDIDO', art: 'art-tortas' },
+      { id: 5, name: 'Cheesecake de Frutos Rojos', desc: 'Base de galletitas, crema suave y salsa natural de frutos rojos.', price: 29500, cat: 'tortas', icon: '🍰', tag: 'DESTACADO', art: 'art-tortas' },
+      { id: 6, name: '24 Sándwiches de Miga Surtidos', desc: 'Jamón y queso, jamón y tomate, primavera y pollo.', price: 34000, cat: 'eventos', icon: '🥪', tag: 'EVENTOS', art: 'art-eventos' },
+      { id: 7, name: 'Box Desayuno para 2 Personas', desc: '6 facturas, 2 jugos naturales, 2 chips de jamón y queso + budín.', price: 24500, cat: 'eventos', icon: '☕', tag: 'REGALO', art: 'art-eventos' },
+      { id: 8, name: 'Focaccia de Romero y Oliva', desc: 'Masa aireada con aceite de oliva virgen extra y sal marina.', price: 6900, cat: 'pan', icon: '🫓', tag: 'ARTESANAL', art: 'art-pan' }
+    ];
+
+    const cart = new Map();
+    let currentCat = 'todos';
+
+    const grid = document.getElementById('productsGrid');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const deliverySelect = document.getElementById('deliveryMode');
+    const addressGroup = document.getElementById('addressGroup');
+    const sendBtn = document.getElementById('sendOrderBtn');
+
+    const fmt = (n) => '$' + n.toLocaleString('es-AR');
+
+    function renderProducts() {
+      const list = currentCat === 'todos' ? PRODUCTS : PRODUCTS.filter(p => p.cat === currentCat);
+      grid.innerHTML = list.map(p => `
+        <article class="product-card">
+          <div class="product-art ${p.art}">
+            <span>${p.icon}</span>
+            <span class="art-tag">${p.tag}</span>
+          </div>
+          <div class="product-info">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div class="product-bottom">
+              <span class="price">${fmt(p.price)}</span>
+              <button class="add-btn" onclick="addToCart(${p.id})">+ Agregar</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    window.addToCart = function(id) {
+      cart.set(id, (cart.get(id) || 0) + 1);
+      renderCart();
+    };
+
+    window.changeQty = function(id, delta) {
+      const next = (cart.get(id) || 0) + delta;
+      if (next <= 0) cart.delete(id);
+      else cart.set(id, next);
+      renderCart();
+    };
+
+    function getCartTotals() {
+      let subtotal = 0;
+      let count = 0;
+      cart.forEach((qty, id) => {
+        const p = PRODUCTS.find(x => x.id === id);
+        if (p) {
+          subtotal += p.price * qty;
+          count += qty;
+        }
+      });
+      const isDelivery = deliverySelect.value === 'Envío a domicilio' && count > 0;
+      const total = subtotal + (isDelivery ? DELIVERY_FEE : 0);
+      return { subtotal, count, total, isDelivery };
+    }
+
+    function renderCart() {
+      const { count, total } = getCartTotals();
+      cartCountEl.textContent = count;
+      cartTotalEl.textContent = fmt(total);
+      sendBtn.disabled = count === 0;
+
+      if (count === 0) {
+        cartItemsEl.innerHTML = '<div class="cart-empty">Agregá productos del catálogo para armar tu pedido directo a WhatsApp.</div>';
+        return;
+      }
+
+      let html = '';
+      cart.forEach((qty, id) => {
+        const p = PRODUCTS.find(x => x.id === id);
+        html += `
+          <div class="cart-row">
+            <div>
+              <strong>${p.name}</strong><br/>
+              <span style="color:#6c5b51">${fmt(p.price * qty)}</span>
+            </div>
+            <div class="qty-controls">
+              <button class="qty-btn" onclick="changeQty(${id}, -1)">-</button>
+              <span>${qty}</span>
+              <button class="qty-btn" onclick="changeQty(${id}, 1)">+</button>
+            </div>
+          </div>
+        `;
+      });
+      cartItemsEl.innerHTML = html;
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCat = btn.dataset.cat;
+        renderProducts();
+      });
+    });
+
+    deliverySelect.addEventListener('change', () => {
+      addressGroup.style.display = deliverySelect.value === 'Envío a domicilio' ? 'block' : 'none';
+      renderCart();
+    });
+
+    sendBtn.addEventListener('click', () => {
+      const name = document.getElementById('custName').value.trim() || 'Cliente';
+      const mode = deliverySelect.value;
+      const address = document.getElementById('custAddress').value.trim();
+      const pay = document.getElementById('payMethod').value;
+      const { total, isDelivery } = getCartTotals();
+
+      let lines = [`Hola Obrador Sur! Soy ${name} y quiero hacer este pedido:`];
+      cart.forEach((qty, id) => {
+        const p = PRODUCTS.find(x => x.id === id);
+        lines.push(`• ${qty}x ${p.name} (${fmt(p.price * qty)})`);
+      });
+      lines.push('');
+      lines.push(`Modalidad: ${mode}${isDelivery && address ? ' — ' + address : ''}`);
+      lines.push(`Pago: ${pay}`);
+      lines.push(`Total: ${fmt(total)}`);
+
+      const message = lines.join('\n');
+      document.getElementById('waMessagePreview').textContent = message;
+      document.getElementById('openWaReal').href = `https://wa.me/${SHOP_WA}?text=${encodeURIComponent(message)}`;
+      document.getElementById('previewModal').classList.add('open');
+    });
+
+    document.getElementById('closeModalBtn').addEventListener('click', () => {
+      document.getElementById('previewModal').classList.remove('open');
+    });
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
