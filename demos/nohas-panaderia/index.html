@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noha's Panadería Artesanal — Pedidos Directos | Clark 402</title>
+  <meta name="description" content="Emprendimiento familiar de panadería artesanal. Facturas, medialunas, chipacitos, ramos de chipá, scones de queso, hojaldre con dulce de leche y tartas. Pedidos directos a WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Dancing+Script:wght@600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fbf7f0;
+      --kraft: #f1e5d3;
+      --card: #ffffff;
+      --ink: #231813;
+      --muted: #6c594e;
+      --crust: #b9602c;
+      --crust-d: #96491e;
+      --green: #1c6b4a;
+      --green-d: #145338;
+      --border: #e8dccb;
+      --shadow: 0 14px 36px rgba(35, 24, 19, 0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      padding-bottom: 100px;
+    }
+    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; margin: 0; line-height: 1.15; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Top sample bar */
+    .demo-bar {
+      background: #141110;
+      color: #f6f1ea;
+      padding: 9px 16px;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      text-align: center;
+    }
+    .demo-bar strong { color: #f4b67f; }
+
+    .wrap { width: min(1100px, 92%); margin: 0 auto; }
+
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(circle at 85% 18%, rgba(217, 134, 67, 0.28), transparent 52%),
+        linear-gradient(135deg, #241711 0%, #44271a 58%, #6d3a21 100%);
+      color: #fffaf3;
+      padding: 36px 0 54px;
+    }
+    .hero-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+    .stamp {
+      width: 62px;
+      height: 62px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+    }
+    .brand-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.05;
+    }
+    .brand-sub {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.15rem;
+      color: #f3c89c;
+      display: block;
+    }
+    .ig-pill {
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .kicker {
+      display: inline-block;
+      background: rgba(244, 182, 127, 0.18);
+      border: 1px solid rgba(244, 182, 127, 0.4);
+      color: #fde0c2;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.4vw, 3.15rem);
+      margin-bottom: 14px;
+    }
+    .hero-lead {
+      font-size: 1.02rem;
+      color: rgba(255, 248, 240, 0.9);
+      margin: 0 0 22px;
+      max-width: 560px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.14s ease, background 0.14s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-warm { background: #e28647; color: #1d110a; }
+    .btn-warm:hover { background: #d47636; }
+    .btn-ghost { background: rgba(255, 255, 255, 0.12); color: #fff; border: 1px solid rgba(255, 255, 255, 0.24); }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      font-size: 0.82rem;
+    }
+    .hero-badges span {
+      background: rgba(0, 0, 0, 0.24);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
+
+    /* Highlight promo card in hero */
+    .signature-card {
+      background: rgba(255, 250, 243, 0.08);
+      border: 1px solid rgba(244, 182, 127, 0.34);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 22px;
+    }
+    .sig-tag {
+      display: inline-block;
+      background: #e28647;
+      color: #1d110a;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .signature-card h3 { font-size: 1.45rem; margin-bottom: 8px; color: #fff; }
+    .signature-card p { font-size: 0.89rem; color: rgba(255, 248, 240, 0.88); margin: 0 0 16px; }
+    .sig-points {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.8rem;
+    }
+    .sig-points div {
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: 10px;
+      padding: 9px 10px;
+    }
+    .sig-points strong { display: block; color: #f6c999; font-size: 0.86rem; }
+
+    /* Story strip */
+    .story-strip {
+      background: var(--kraft);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    .story-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: #4b382d;
+      font-weight: 600;
+    }
+
+    /* Main Shop Layout */
+    .shop-section { padding: 34px 0 40px; }
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 1fr 355px;
+      gap: 28px;
+      align-items: start;
+    }
+    .notice {
+      background: #fff9f0;
+      border: 1px solid #ecd4b4;
+      color: #6b4320;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 0.83rem;
+      margin-bottom: 18px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .fbtn {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      padding: 9px 15px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.86rem;
+      cursor: pointer;
+    }
+    .fbtn.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .pcard {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.16s ease, transform 0.16s ease;
+    }
+    .pcard:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+    .pcard.featured { border-color: #d98647; }
+
+    .part {
+      height: 108px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      color: #fff;
+      font-size: 2.2rem;
+    }
+    .art-chipa { background: linear-gradient(135deg, #9f4b21, #df8d43); }
+    .art-dulce { background: linear-gradient(135deg, #6b331b, #b66233); }
+    .art-salado { background: linear-gradient(135deg, #7c5228, #c4934f); }
+    .art-tartas { background: linear-gradient(135deg, #5c272c, #a54e55); }
+    .art-sano { background: linear-gradient(135deg, #3b573b, #6f9462); }
+
+    .ptag {
+      background: rgba(0, 0, 0, 0.34);
+      font-size: 0.69rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+    .pbody {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .pbody h3 { font-size: 1.12rem; margin-bottom: 5px; }
+    .pbody p { color: var(--muted); font-size: 0.85rem; margin: 0 0 14px; flex: 1; }
+    .pbot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .price-wrap { line-height: 1.15; }
+    .price { font-weight: 700; font-size: 1.04rem; display: block; }
+    .price-ref { font-size: 0.72rem; color: var(--muted); }
+
+    .add-btn {
+      background: var(--crust);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      cursor: pointer;
+    }
+    .add-btn:hover { background: var(--crust-d); }
+
+    /* Cart Panel */
+    .cart {
+      position: sticky;
+      top: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .cart h2 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cnt {
+      background: var(--crust);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .citems {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 230px;
+      overflow-y: auto;
+      margin-bottom: 14px;
+    }
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding: 18px 10px;
+      background: var(--bg);
+      border-radius: 12px;
+    }
+    .crow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.86rem;
+    }
+    .qty { display: flex; align-items: center; gap: 6px; }
+    .qbtn {
+      width: 25px; height: 25px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .fg { margin-bottom: 10px; }
+    .fg label { display: block; font-size: 0.77rem; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .fg input, .fg select, .fg textarea {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      background: #fff;
+    }
+    .fg textarea { resize: vertical; min-height: 54px; }
+
+    .tot {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+    .wa-btn {
+      width: 100%;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    .wa-btn:hover { background: var(--green-d); }
+    .wa-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* Info / Loyalty / Wholesale Band */
+    .extra-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 34px;
+    }
+    .extra-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+    .extra-card h3 { font-size: 1.35rem; margin-bottom: 8px; }
+    .extra-card p { color: var(--muted); font-size: 0.9rem; margin: 0 0 14px; }
+
+    /* Floating mobile cart bar */
+    .mobile-bar {
+      display: none;
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 16px;
+      padding: 13px 18px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+      justify-content: space-between;
+      align-items: center;
+      z-index: 80;
+    }
+    .mobile-bar strong { color: #f6c999; }
+    .mobile-bar a {
+      background: #e28647;
+      color: #1d110a;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 8px 14px;
+      border-radius: 10px;
+    }
+
+    /* Modal */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+      display: none;
+      place-items: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-bg.open { display: grid; }
+    .modal {
+      background: #fff;
+      border-radius: 20px;
+      padding: 24px;
+      width: min(470px, 100%);
+    }
+    .modal pre {
+      background: #edf7f1;
+      border: 1px solid #bde3cc;
+      border-radius: 12px;
+      padding: 14px;
+      white-space: pre-wrap;
+      font-family: inherit;
+      font-size: 0.87rem;
+      color: #143627;
+      margin: 12px 0 16px;
+    }
+    .mact { display: flex; gap: 10px; }
+    .bsec {
+      flex: 1;
+      background: #eee;
+      border: none;
+      border-radius: 10px;
+      padding: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 0;
+      margin-top: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .shop-layout, .products-grid, .extra-grid { grid-template-columns: 1fr; }
+      .cart { position: static; }
+      .mobile-bar.has-items { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <span><strong>Muestra interactiva creada para Noha's Panadería Artesanal</strong> · Probá armar un pedido directo a WhatsApp sin comisiones</span>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-nav">
+        <div class="brand-lockup">
+          <!-- Sello artesanal inspirado en el logo oficial de @nohaspanaderia -->
+          <svg class="stamp" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Noha's Panadería Artesanal">
+            <circle cx="60" cy="60" r="56" fill="#FAF6EE" />
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#231813" stroke-width="2" stroke-dasharray="5 3" />
+            <circle cx="60" cy="60" r="45" fill="none" stroke="#231813" stroke-width="1.2" />
+            <text x="60" y="57" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="16" font-weight="700" fill="#231813">•NOHA'S•</text>
+            <text x="60" y="74" text-anchor="middle" font-family="Dancing Script, cursive" font-size="11.5" font-weight="700" fill="#6D3A21">Panadería Artesanal</text>
+          </svg>
+          <div>
+            <div class="brand-title">•NOHA'S•</div>
+            <span class="brand-sub">Panadería Artesanal</span>
+          </div>
+        </div>
+        <a class="ig-pill" href="https://www.instagram.com/nohaspanaderia/" target="_blank" rel="noopener noreferrer">
+          📸 @nohaspanaderia · Clark 402
+        </a>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <span class="kicker">👨‍👩‍👧‍👦 Emprendimiento familiar · Amor por lo que hacemos</span>
+          <h1>Facturas recién horneadas, chipacitos, hojaldre y ramos de chipá directo a tu mesa.</h1>
+          <p class="hero-lead">
+            Calidad de productos y materia prima de primera. Elegí todo desde tu celular y mandá tu pedido armado directo a nuestro WhatsApp — sin filas y sin comisiones.
+          </p>
+          <div class="hero-actions">
+            <a href="#catalogo" class="btn btn-warm">Ver catálogo y pedir ahora ↓</a>
+            <a href="#encargos" class="btn btn-ghost">Ramos de Chipá & Tartas</a>
+          </div>
+          <div class="hero-badges">
+            <span>📍 Retiro en Clark 402</span>
+            <span>🧡 Ramo de Chipá Corazón</span>
+            <span>📲 Pedido directo por WhatsApp</span>
+          </div>
+        </div>
+
+        <div class="signature-card">
+          <span class="sig-tag">Especialidad de la casa</span>
+          <h3>🧡 Ramo de Chipá Corazón</h3>
+          <p>Nuestros chipacitos artesanales en forma de corazón, presentados en cono kraft. El regalo más original para sorprender en cumpleaños, aniversarios o meriendas.</p>
+          <div class="sig-points">
+            <div><strong>100% Artesanal</strong>Hechos en el día</div>
+            <div><strong>Por Encargo</strong>Retirá sin esperar</div>
+          </div>
+          <button class="btn btn-warm" style="width:100%;" onclick="addItem(1); document.getElementById('pedido').scrollIntoView({behavior:'smooth'});">
+            + Agregar Ramo de Chipá al pedido
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="story-strip">
+    <div class="wrap story-inner">
+      <span>🍞 Calidad de materia prima artesanal</span>
+      <span>🥐 Elaboración diaria detrás del mostrador</span>
+      <span>📍 Retiro en el local — Clark 402</span>
+      <span>💬 Pedidos directos: 11 5456-0697</span>
+    </div>
+  </div>
+
+  <main class="wrap shop-section" id="catalogo">
+    <div class="shop-layout">
+      <section>
+        <div class="notice">
+          <strong>Muestra interactiva para Noha's Panadería:</strong> Los valores son de referencia para probar cómo calcula el carrito. Al activarla cargamos los precios exactos del mostrador y sus fotos reales de Instagram en el día.
+        </div>
+
+        <div class="filters">
+          <button class="fbtn active" data-cat="todos">Todo el mostrador</button>
+          <button class="fbtn" data-cat="chipa">Chipá & Ramos</button>
+          <button class="fbtn" data-cat="facturas">Facturas & Hojaldre</button>
+          <button class="fbtn" data-cat="salado">Salado & Mate</button>
+          <button class="fbtn" data-cat="tartas">Tartas & Roscas</button>
+        </div>
+
+        <div class="products-grid" id="grid"></div>
+
+        <div class="extra-grid" id="encargos">
+          <div class="extra-card">
+            <h3>✨ Club Clientes Amigos</h3>
+            <p>¿Sabías que premiamos a los clientes que siempre vuelven por sus facturas? Consultanos por nuestras promos y sorteos de docenas de facturas y fechas especiales.</p>
+            <a class="btn btn-warm" href="https://wa.me/5491154560697?text=Hola%20Noha's!%20Quiero%20consultar%20por%20las%20promos%20de%20facturas%20y%20encargos." target="_blank" rel="noopener noreferrer">
+              Consultar promos por WhatsApp →
+            </a>
+          </div>
+          <div class="extra-card">
+            <h3>🥖 Eventos, Reuniones y Reparto</h3>
+            <p>¿Necesitás bandejas grandes de facturas, chipacitos, bizcochitos o tartas para un evento, oficina o comercio? Coordiná tu encargo con anticipación.</p>
+            <a class="btn" style="background:#231813;color:#fff;" href="https://wa.me/5491154560697?text=Hola%20Noha's!%20Quiero%20consultar%20por%20un%20pedido%20grande%20/%20mayorista." target="_blank" rel="noopener noreferrer">
+              Pedir presupuesto mayorista →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <aside class="cart" id="pedido" aria-label="Tu pedido en Noha's">
+        <h2>Tu Pedido <span class="cnt" id="cnt">0</span></h2>
+        <div class="citems" id="citems">
+          <div class="empty">Tocá "+ Agregar" en cualquier producto para armar tu pedido y enviarlo directo a Noha's por WhatsApp.</div>
+        </div>
+
+        <div class="fg">
+          <label for="custName">Tu nombre</label>
+          <input id="custName" type="text" placeholder="Ej: Valeria López" />
+        </div>
+        <div class="fg">
+          <label for="mode">Retiro / Entrega</label>
+          <select id="mode">
+            <option value="Retiro en el local (Clark 402)">Retiro en el local (Clark 402)</option>
+            <option value="Consultar disponibilidad de envío">Consultar disponibilidad de envío</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label for="when">¿Para cuándo lo querés?</label>
+          <select id="when">
+            <option value="Lo antes posible (hoy)">Lo antes posible (hoy)</option>
+            <option value="Hoy a la tarde (para el mate)">Hoy a la tarde (para el mate)</option>
+            <option value="Encargo programado (mañana / fin de semana)">Encargo programado (mañana / fin de semana)</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label for="pay">Medio de pago</label>
+          <select id="pay">
+            <option value="Transferencia / Mercado Pago">Transferencia / Mercado Pago</option>
+            <option value="Efectivo en el local">Efectivo en el local</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label for="notes">Aclaraciones (opcional)</label>
+          <textarea id="notes" placeholder="Ej: Surtido con mucha pastelera y dulce de leche / Dedicatoria para el ramo..."></textarea>
+        </div>
+
+        <div class="tot">
+          <span>Subtotal ref.</span>
+          <span id="tot">$0</span>
+        </div>
+        <button class="wa-btn" id="sendBtn" disabled>Enviar pedido por WhatsApp →</button>
+      </aside>
+    </div>
+  </main>
+
+  <div class="mobile-bar" id="mobileBar">
+    <div>
+      <span id="mCount">0 prod.</span> · <strong id="mTotal">$0</strong>
+    </div>
+    <a href="#pedido">Ver mi pedido →</a>
+  </div>
+
+  <div class="modal-bg" id="mbg">
+    <div class="modal">
+      <h3>¡Pedido armado para Noha's!</h3>
+      <p style="color:#6c594e;font-size:0.87rem;margin:6px 0 0;">Así llega el mensaje ordenado directo al WhatsApp del local (+54 9 11 5456-0697):</p>
+      <pre id="pre"></pre>
+      <div class="mact">
+        <button class="bsec" id="cls">Seguir editando</button>
+        <a class="wa-btn" id="go" href="#" target="_blank" rel="noopener noreferrer" style="text-align:center;flex:1.4;">Abrir en WhatsApp →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <strong>•NOHA'S• Panadería Artesanal</strong> · Emprendimiento familiar · 📍 Clark 402 · WhatsApp +54 9 11 5456-0697 · IG @nohaspanaderia
+    </div>
+  </footer>
+
+  <script>
+    const NOHAS_WA = '5491154560697';
+
+    const PRODUCTS = [
+      { id: 1, name: 'Ramo de Chipá Corazón (Cono Kraft)', desc: 'Nuestra especialidad: chipacitos artesanales en forma de corazón presentados en cono kraft para regalar o compartir.', price: 9500, cat: 'chipa', icon: '🧡', tag: '★ ESPECIALIDAD', art: 'art-chipa', featured: true },
+      { id: 2, name: 'Chipacitos Artesanales (1/4 Kg)', desc: 'Bien quesosos, doraditos por fuera y tiernos por dentro, recién salidos del horno.', price: 5800, cat: 'chipa', icon: '🧀', tag: 'MÁS PEDIDO', art: 'art-chipa' },
+      { id: 3, name: 'Docena de Facturas & Medialunas', desc: 'Surtido artesanal de medialunas de manteca/grasa, crema pastelera, dulce de leche y membrillo.', price: 9600, cat: 'facturas', icon: '🥐', tag: 'HORNEADO HOY', art: 'art-dulce' },
+      { id: 4, name: 'Media Docena de Facturas', desc: 'Elegí tus favoritas para el desayuno o la merienda.', price: 5000, cat: 'facturas', icon: '🥐', tag: 'CLÁSICO', art: 'art-dulce' },
+      { id: 5, name: 'Hojaldre Relleno con Dulce de Leche (x4)', desc: 'Capas súper crocantes de hojaldre artesanal generosamente rellenas con dulce de leche repostero.', price: 7800, cat: 'facturas', icon: '🍯', tag: 'DETRÁS DEL MOSTRADOR', art: 'art-dulce' },
+      { id: 6, name: 'Scones de Queso (x6 unidades)', desc: 'Ideales para la tardecita con mate o café, elaborados con queso real.', price: 6200, cat: 'salado', icon: '☀️', tag: 'TARDECITA', art: 'art-salado' },
+      { id: 7, name: 'Bizcochitos de Grasa Hojaldrados (1/4 Kg)', desc: 'El infaltable para el mate: livianos, hojaldrados y recién horneados.', price: 3800, cat: 'salado', icon: '🧉', tag: 'PARA EL MATE', art: 'art-salado' },
+      { id: 8, name: 'Galletitas Integrales con Semillas', desc: 'Harina integral con mix de lino, chía y girasol. Para los que eligen algo más liviano.', price: 4200, cat: 'salado', icon: '🌻', tag: 'OPCIÓN LIVIANA', art: 'art-sano' },
+      { id: 9, name: 'Tarta Artesanal por Encargo', desc: 'Tarta dulce artesanal (dulce de leche, crema pastelera, pasta frola o cabsha) para compartir.', price: 21000, cat: 'tartas', icon: '🍰', tag: 'A PEDIDO', art: 'art-tartas' },
+      { id: 10, name: 'Rosca Artesanal con Crema Pastelera', desc: 'Masa suave y esponjosa decorada con abundante crema pastelera y cerezas.', price: 14500, cat: 'tartas', icon: '🍩', tag: 'ARTESANAL', art: 'art-tartas' }
+    ];
+
+    const cart = new Map();
+    let activeCat = 'todos';
+    const fmt = n => '$' + n.toLocaleString('es-AR');
+
+    function renderProducts() {
+      const list = activeCat === 'todos' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeCat);
+      document.getElementById('grid').innerHTML = list.map(p => `
+        <article class="pcard ${p.featured ? 'featured' : ''}">
+          <div class="part ${p.art}">
+            <span>${p.icon}</span>
+            <span class="ptag">${p.tag}</span>
+          </div>
+          <div class="pbody">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div class="pbot">
+              <div class="price-wrap">
+                <span class="price">${fmt(p.price)}</span>
+                <span class="price-ref">valor ref.</span>
+              </div>
+              <button class="add-btn" onclick="addItem(${p.id})">+ Agregar</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    window.addItem = function(id) {
+      cart.set(id, (cart.get(id) || 0) + 1);
+      renderCart();
+    };
+
+    window.chgItem = function(id, delta) {
+      const next = (cart.get(id) || 0) + delta;
+      if (next <= 0) cart.delete(id);
+      else cart.set(id, next);
+      renderCart();
+    };
+
+    function renderCart() {
+      let count = 0, total = 0, html = '';
+      cart.forEach((qty, id) => {
+        const p = PRODUCTS.find(x => x.id === id);
+        if (!p) return;
+        count += qty;
+        total += p.price * qty;
+        html += `
+          <div class="crow">
+            <div>
+              <strong>${p.name}</strong><br/>
+              <span style="color:#6c594e">${fmt(p.price * qty)}</span>
+            </div>
+            <div class="qty">
+              <button class="qbtn" onclick="chgItem(${id}, -1)">-</button>
+              <span>${qty}</span>
+              <button class="qbtn" onclick="chgItem(${id}, 1)">+</button>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById('cnt').textContent = count;
+      document.getElementById('tot').textContent = fmt(total);
+      document.getElementById('sendBtn').disabled = count === 0;
+      document.getElementById('citems').innerHTML = count
+        ? html
+        : '<div class="empty">Tocá "+ Agregar" en cualquier producto para armar tu pedido y enviarlo directo a Noha\'s por WhatsApp.</div>';
+
+      const mb = document.getElementById('mobileBar');
+      document.getElementById('mCount').textContent = `${count} ${count === 1 ? 'prod.' : 'prods.'}`;
+      document.getElementById('mTotal').textContent = fmt(total);
+      mb.classList.toggle('has-items', count > 0);
+    }
+
+    document.querySelectorAll('.fbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCat = btn.dataset.cat;
+        renderProducts();
+      });
+    });
+
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      const name = document.getElementById('custName').value.trim() || 'Cliente';
+      const mode = document.getElementById('mode').value;
+      const when = document.getElementById('when').value;
+      const pay = document.getElementById('pay').value;
+      const notes = document.getElementById('notes').value.trim();
+
+      let total = 0;
+      const lines = [`Hola Noha's Panadería! Soy ${name} y quiero hacer este pedido:`];
+      cart.forEach((qty, id) => {
+        const p = PRODUCTS.find(x => x.id === id);
+        total += p.price * qty;
+        lines.push(`• ${qty}x ${p.name}`);
+      });
+      lines.push('');
+      lines.push(`📍 Modalidad: ${mode}`);
+      lines.push(`⏰ Cuándo: ${when}`);
+      lines.push(`💳 Pago: ${pay}`);
+      if (notes) lines.push(`📝 Notas: ${notes}`);
+      lines.push(`Total ref.: ${fmt(total)} (a confirmar por el local)`);
+
+      const msg = lines.join('\n');
+      document.getElementById('pre').textContent = msg;
+      document.getElementById('go').href = `https://wa.me/${NOHAS_WA}?text=${encodeURIComponent(msg)}`;
+      document.getElementById('mbg').classList.add('open');
+    });
+
+    document.getElementById('cls').addEventListener('click', () => {
+      document.getElementById('mbg').classList.remove('open');
+    });
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
