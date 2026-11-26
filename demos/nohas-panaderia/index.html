@@ -55,8 +55,8 @@
     /* Hero */
     .hero {
       background:
-        radial-gradient(circle at 85% 18%, rgba(217, 134, 67, 0.28), transparent 52%),
-        linear-gradient(135deg, #241711 0%, #44271a 58%, #6d3a21 100%);
+        linear-gradient(125deg, rgba(28, 17, 12, 0.9) 0%, rgba(56, 31, 20, 0.82) 56%, rgba(88, 45, 24, 0.76) 100%),
+        url('./img/facturas.jpg') center/cover no-repeat;
       color: #fffaf3;
       padding: 36px 0 54px;
     }
@@ -168,12 +168,19 @@
 
     /* Highlight promo card in hero */
     .signature-card {
-      background: rgba(255, 250, 243, 0.08);
-      border: 1px solid rgba(244, 182, 127, 0.34);
-      backdrop-filter: blur(8px);
+      background: rgba(24, 15, 11, 0.72);
+      border: 1px solid rgba(244, 182, 127, 0.38);
+      backdrop-filter: blur(10px);
       border-radius: 20px;
-      padding: 22px;
+      overflow: hidden;
     }
+    .sig-img {
+      width: 100%;
+      height: 165px;
+      object-fit: cover;
+      display: block;
+    }
+    .sig-body { padding: 18px 20px 20px; }
     .sig-tag {
       display: inline-block;
       background: #e28647;
@@ -276,25 +283,32 @@
     .pcard.featured { border-color: #d98647; }
 
     .part {
-      height: 108px;
-      padding: 14px;
+      position: relative;
+      height: 148px;
+      padding: 12px;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: flex-start;
       color: #fff;
-      font-size: 2.2rem;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
     }
-    .art-chipa { background: linear-gradient(135deg, #9f4b21, #df8d43); }
-    .art-dulce { background: linear-gradient(135deg, #6b331b, #b66233); }
-    .art-salado { background: linear-gradient(135deg, #7c5228, #c4934f); }
-    .art-tartas { background: linear-gradient(135deg, #5c272c, #a54e55); }
-    .art-sano { background: linear-gradient(135deg, #3b573b, #6f9462); }
-
+    .part::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20, 12, 8, 0.32) 0%, rgba(20, 12, 8, 0.05) 55%, rgba(20, 12, 8, 0.25) 100%);
+      pointer-events: none;
+    }
     .ptag {
-      background: rgba(0, 0, 0, 0.34);
+      position: relative;
+      z-index: 2;
+      background: rgba(20, 12, 8, 0.72);
+      backdrop-filter: blur(4px);
       font-size: 0.69rem;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 5px 10px;
       border-radius: 999px;
       letter-spacing: 0.04em;
     }
@@ -568,16 +582,19 @@
         </div>
 
         <div class="signature-card">
-          <span class="sig-tag">Especialidad de la casa</span>
-          <h3>🧡 Ramo de Chipá Corazón</h3>
-          <p>Nuestros chipacitos artesanales en forma de corazón, presentados en cono kraft. El regalo más original para sorprender en cumpleaños, aniversarios o meriendas.</p>
-          <div class="sig-points">
-            <div><strong>100% Artesanal</strong>Hechos en el día</div>
-            <div><strong>Por Encargo</strong>Retirá sin esperar</div>
+          <img class="sig-img" src="./img/chipa.jpg" alt="Chipacitos artesanales en cono kraft de Noha's Panadería" />
+          <div class="sig-body">
+            <span class="sig-tag">Especialidad de la casa</span>
+            <h3>🧡 Ramo de Chipá Corazón</h3>
+            <p>Nuestros chipacitos artesanales en forma de corazón, presentados en cono kraft. El regalo más original para sorprender en cumpleaños, aniversarios o meriendas.</p>
+            <div class="sig-points">
+              <div><strong>100% Artesanal</strong>Hechos en el día</div>
+              <div><strong>Por Encargo</strong>Retirá sin esperar</div>
+            </div>
+            <button class="btn btn-warm" style="width:100%;" onclick="addItem(1); document.getElementById('pedido').scrollIntoView({behavior:'smooth'});">
+              + Agregar Ramo de Chipá al pedido
+            </button>
           </div>
-          <button class="btn btn-warm" style="width:100%;" onclick="addItem(1); document.getElementById('pedido').scrollIntoView({behavior:'smooth'});">
-            + Agregar Ramo de Chipá al pedido
-          </button>
         </div>
       </div>
     </div>
@@ -702,16 +719,16 @@
     const NOHAS_WA = '5491154560697';
 
     const PRODUCTS = [
-      { id: 1, name: 'Ramo de Chipá Corazón (Cono Kraft)', desc: 'Nuestra especialidad: chipacitos artesanales en forma de corazón presentados en cono kraft para regalar o compartir.', price: 9500, cat: 'chipa', icon: '🧡', tag: '★ ESPECIALIDAD', art: 'art-chipa', featured: true },
-      { id: 2, name: 'Chipacitos Artesanales (1/4 Kg)', desc: 'Bien quesosos, doraditos por fuera y tiernos por dentro, recién salidos del horno.', price: 5800, cat: 'chipa', icon: '🧀', tag: 'MÁS PEDIDO', art: 'art-chipa' },
-      { id: 3, name: 'Docena de Facturas & Medialunas', desc: 'Surtido artesanal de medialunas de manteca/grasa, crema pastelera, dulce de leche y membrillo.', price: 9600, cat: 'facturas', icon: '🥐', tag: 'HORNEADO HOY', art: 'art-dulce' },
-      { id: 4, name: 'Media Docena de Facturas', desc: 'Elegí tus favoritas para el desayuno o la merienda.', price: 5000, cat: 'facturas', icon: '🥐', tag: 'CLÁSICO', art: 'art-dulce' },
-      { id: 5, name: 'Hojaldre Relleno con Dulce de Leche (x4)', desc: 'Capas súper crocantes de hojaldre artesanal generosamente rellenas con dulce de leche repostero.', price: 7800, cat: 'facturas', icon: '🍯', tag: 'DETRÁS DEL MOSTRADOR', art: 'art-dulce' },
-      { id: 6, name: 'Scones de Queso (x6 unidades)', desc: 'Ideales para la tardecita con mate o café, elaborados con queso real.', price: 6200, cat: 'salado', icon: '☀️', tag: 'TARDECITA', art: 'art-salado' },
-      { id: 7, name: 'Bizcochitos de Grasa Hojaldrados (1/4 Kg)', desc: 'El infaltable para el mate: livianos, hojaldrados y recién horneados.', price: 3800, cat: 'salado', icon: '🧉', tag: 'PARA EL MATE', art: 'art-salado' },
-      { id: 8, name: 'Galletitas Integrales con Semillas', desc: 'Harina integral con mix de lino, chía y girasol. Para los que eligen algo más liviano.', price: 4200, cat: 'salado', icon: '🌻', tag: 'OPCIÓN LIVIANA', art: 'art-sano' },
-      { id: 9, name: 'Tarta Artesanal por Encargo', desc: 'Tarta dulce artesanal (dulce de leche, crema pastelera, pasta frola o cabsha) para compartir.', price: 21000, cat: 'tartas', icon: '🍰', tag: 'A PEDIDO', art: 'art-tartas' },
-      { id: 10, name: 'Rosca Artesanal con Crema Pastelera', desc: 'Masa suave y esponjosa decorada con abundante crema pastelera y cerezas.', price: 14500, cat: 'tartas', icon: '🍩', tag: 'ARTESANAL', art: 'art-tartas' }
+      { id: 1, name: 'Ramo de Chipá Corazón (Cono Kraft)', desc: 'Nuestra especialidad: chipacitos artesanales en forma de corazón presentados en cono kraft para regalar o compartir.', price: 9500, cat: 'chipa', tag: '★ ESPECIALIDAD', img: './img/chipa.jpg', featured: true },
+      { id: 2, name: 'Chipacitos Artesanales (1/4 Kg)', desc: 'Bien quesosos, doraditos por fuera y tiernos por dentro, recién salidos del horno.', price: 5800, cat: 'chipa', tag: 'MÁS PEDIDO', img: './img/chipa.jpg' },
+      { id: 3, name: 'Docena de Facturas & Medialunas', desc: 'Surtido artesanal de medialunas de manteca/grasa, crema pastelera, dulce de leche y membrillo.', price: 9600, cat: 'facturas', tag: 'HORNEADO HOY', img: './img/facturas.jpg' },
+      { id: 4, name: 'Media Docena de Facturas', desc: 'Elegí tus favoritas para el desayuno o la merienda.', price: 5000, cat: 'facturas', tag: 'CLÁSICO', img: './img/facturas.jpg' },
+      { id: 5, name: 'Hojaldre Relleno con Dulce de Leche (x4)', desc: 'Capas súper crocantes de hojaldre artesanal generosamente rellenas con dulce de leche repostero.', price: 7800, cat: 'facturas', tag: 'DETRÁS DEL MOSTRADOR', img: './img/facturas.jpg' },
+      { id: 6, name: 'Scones de Queso (x6 unidades)', desc: 'Ideales para la tardecita con mate o café, elaborados con queso real.', price: 6200, cat: 'salado', tag: 'TARDECITA', img: './img/salado.jpg' },
+      { id: 7, name: 'Bizcochitos de Grasa Hojaldrados (1/4 Kg)', desc: 'El infaltable para el mate: livianos, hojaldrados y recién horneados.', price: 3800, cat: 'salado', tag: 'PARA EL MATE', img: './img/salado.jpg' },
+      { id: 8, name: 'Galletitas Integrales con Semillas', desc: 'Harina integral con mix de lino, chía y girasol. Para los que eligen algo más liviano.', price: 4200, cat: 'salado', tag: 'OPCIÓN LIVIANA', img: './img/salado.jpg' },
+      { id: 9, name: 'Tarta Artesanal por Encargo', desc: 'Tarta dulce artesanal (dulce de leche, crema pastelera, pasta frola o cabsha) para compartir.', price: 21000, cat: 'tartas', tag: 'A PEDIDO', img: './img/facturas.jpg' },
+      { id: 10, name: 'Rosca Artesanal con Crema Pastelera', desc: 'Masa suave y esponjosa decorada con abundante crema pastelera y cerezas.', price: 14500, cat: 'tartas', tag: 'ARTESANAL', img: './img/facturas.jpg' }
     ];
 
     const cart = new Map();
@@ -722,8 +739,7 @@
       const list = activeCat === 'todos' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeCat);
       document.getElementById('grid').innerHTML = list.map(p => `
         <article class="pcard ${p.featured ? 'featured' : ''}">
-          <div class="part ${p.art}">
-            <span>${p.icon}</span>
+          <div class="part" style="background-image:url('${p.img}')">
             <span class="ptag">${p.tag}</span>
           </div>
           <div class="pbody">
